@@ -1,0 +1,1 @@
+# This is the repo containing my solutions for AoC 2025. I have attempted this years's AoC in Golang. The code references only the standard package

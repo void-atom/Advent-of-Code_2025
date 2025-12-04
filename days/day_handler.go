@@ -5,7 +5,8 @@ type Day struct {
 	PartTwo func(string) int
 }
 
-var Days_map = map[int]Day{
-	1: {Day_one_part_one, Day_one_part_two},
-	2: {Day_two_part_one, Day_two_part_two},
+var DaysMap = map[int]Day{
+	1: {DayOnePartOne, DayOnePartTwo},
+	2: {DayTwoPartOne, DayTwoPartTwo},
+	3: {DayThreePartOne, DayThreePartTwo},
 }

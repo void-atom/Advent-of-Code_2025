@@ -9,7 +9,7 @@ import (
 )
 
 // Formula: invalid = r*10^(len(r))+r
-func Day_two_part_one(input string) int {
+func DayTwoPartOne(input string) int {
 	input_data := strings.Split(input, ",")
 	INDEX_ZERO := 0
 	INDEX_ONE := 1
@@ -45,10 +45,10 @@ func Day_two_part_one(input string) int {
 		}
 	}
 
-	return internal.Sum_Int_Slice(invalid_numbers)
+	return internal.SumIntSlice(invalid_numbers)
 }
 
-func Day_two_part_two(input string) int {
+func DayTwoPartTwo(input string) int {
 	input_data := strings.Split(input, ",")
 	fmt.Println(input_data)
 	return 2

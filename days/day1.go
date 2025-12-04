@@ -12,7 +12,7 @@ import (
 // 4. If R is found, add number to dial and bring the result between 0-99 by using modulo 100.
 // 5. If the result is 0, increment counter
 
-func Day_one_part_one(input string) int {
+func DayOnePartOne(input string) int {
 	dial_value := 50
 	zero_count := 0
 	for i := 0; i < len(input); {
@@ -22,7 +22,7 @@ func Day_one_part_one(input string) int {
 		if input[i] == '\n' || input[i] == '\r' {
 			i++
 		} else if input[i] == 'L' {
-			total_digits := internal.Find_number_index(input, i)
+			total_digits := internal.FindNumberIndex(input, i)
 			number, _ := strconv.Atoi(input[i+1 : i+total_digits])
 			dial_value = (dial_value - number) % 100
 			if dial_value < 0 {
@@ -34,7 +34,7 @@ func Day_one_part_one(input string) int {
 			i += total_digits
 
 		} else if input[i] == 'R' {
-			total_digits := internal.Find_number_index(input, i)
+			total_digits := internal.FindNumberIndex(input, i)
 			number, _ := strconv.Atoi(input[i+1 : i+total_digits])
 			dial_value = (dial_value + number) % 100
 			if dial_value == 0 {
@@ -48,7 +48,7 @@ func Day_one_part_one(input string) int {
 	return zero_count
 }
 
-func Day_one_part_two(input string) int {
+func DayOnePartTwo(input string) int {
 	dial_value := 50
 	zero_count := 0
 	for i := 0; i < len(input); {
@@ -59,7 +59,7 @@ func Day_one_part_two(input string) int {
 		if input[i] == '\n' || input[i] == '\r' {
 			i++
 		} else if input[i] == 'L' {
-			total_digits := internal.Find_number_index(input, i)
+			total_digits := internal.FindNumberIndex(input, i)
 
 			number, _ := strconv.Atoi(input[i+1 : i+total_digits])
 			zero_crossings := (dial_value - number) / 100
@@ -79,7 +79,7 @@ func Day_one_part_two(input string) int {
 			i += total_digits + 1
 
 		} else if input[i] == 'R' {
-			total_digits := internal.Find_number_index(input, i)
+			total_digits := internal.FindNumberIndex(input, i)
 			number, _ := strconv.Atoi(input[i+1 : i+total_digits])
 			zero_crossings := (dial_value + number) / 100
 			if (dial_value + number) >= 100 {

@@ -2,19 +2,20 @@ package internal
 
 import (
 	"os"
+	"strconv"
 )
 
 // function to just check errs from std lib functions
-func Check_error(e error) {
+func CheckError(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
 
 // Reads the entire input and returns a string of the input
-func Read_file(file_path string) string {
+func ReadFile(file_path string) string {
 	input_data, err := os.ReadFile(file_path)
-	Check_error(err)
+	CheckError(err)
 	// fmt.Print(string(input_data))
 	return string(input_data)
 }
@@ -24,7 +25,7 @@ func Read_file(file_path string) string {
 // Returns -> 3 [the total digits before the start of newline]
 // Checks: out of bound errors and total look forward chars
 
-func Find_number_index(input string, initial_index int) int {
+func FindNumberIndex(input string, initial_index int) int {
 	// Assuming that the max number that can occur is upto 4 digits
 	// Example: 0-9999
 	if initial_index >= len(input) {
@@ -45,10 +46,24 @@ func Find_number_index(input string, initial_index int) int {
 	return total_digits
 }
 
-func Sum_Int_Slice(numbers []int) int {
+// Gives sum of a slice
+func SumIntSlice(numbers []int) int {
 	total := 0
 	for _, number := range numbers {
 		total += number
 	}
 	return total
+}
+
+// Returns an array where each index has the max value for all numbers behind this index
+func MaxTillRight(numbers string) []int {
+	max_array := make([]int, len(numbers))
+	curr_max := -1
+
+	for i := len(numbers) - 1; i > -1; i-- {
+		max_array[i] = curr_max
+		candidate, _ := strconv.Atoi(string(numbers[i]))
+		curr_max = max(candidate, curr_max)
+	}
+	return max_array
 }

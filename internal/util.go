@@ -3,6 +3,7 @@ package internal
 import (
 	"os"
 	"strconv"
+	"strings"
 )
 
 // function to just check errs from std lib functions
@@ -66,4 +67,18 @@ func MaxTillRight(numbers string) []int {
 		curr_max = max(candidate, curr_max)
 	}
 	return max_array
+}
+
+// Check if the string is composed of repeated substring present in it
+// eg: if 121212 -> return true
+// 	   if 12122 -> returns false
+
+func RepeatedSubstring(number string) bool {
+	test := number + number
+
+	// fmt.Println(test, test[1:len(test)-1])
+	value_to_return := strings.Contains(test[1:len(test)-1], number)
+	// fmt.Println(value_to_return)
+	return value_to_return
+
 }

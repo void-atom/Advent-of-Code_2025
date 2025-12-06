@@ -2,7 +2,6 @@ package days
 
 import (
 	"aoc2025/internal"
-	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -50,6 +49,27 @@ func DayTwoPartOne(input string) int {
 
 func DayTwoPartTwo(input string) int {
 	input_data := strings.Split(input, ",")
-	fmt.Println(input_data)
-	return 2
+	answer := 0
+
+	INDEX_ZERO := 0
+	INDEX_ONE := 1
+
+	// input_data = []string{"824824821-824824827"}
+	for _, num_range := range input_data {
+		scan_range := strings.Split(num_range, "-")
+
+		start, _ := strconv.Atoi(scan_range[INDEX_ZERO])
+		end, _ := strconv.Atoi(scan_range[INDEX_ONE])
+
+		for i := start; i <= end; i++ {
+			to_sum := internal.RepeatedSubstring(strconv.Itoa(i))
+			if to_sum {
+				// fmt.Println(i)
+				answer += i
+			}
+
+		}
+
+	}
+	return answer
 }

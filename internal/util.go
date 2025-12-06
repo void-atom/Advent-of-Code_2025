@@ -2,6 +2,7 @@ package internal
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -85,20 +86,21 @@ func RepeatedSubstring(number string) bool {
 }
 
 // This stack code is AI generated
-type Stack struct {
-	items []interface{} // Using interface{} allows for storing any type
+type Stack[T any] struct {
+	items []T
 }
 
 // Push adds an item to the top of the stack.
-func (s *Stack) Push(item interface{}) {
+func (s *Stack[T]) Push(item T) {
 	s.items = append(s.items, item)
 }
 
 // Pop removes and returns the top item from the stack.
 // It returns the item and a boolean indicating success, or an error if the stack is empty.
-func (s *Stack) Pop() (interface{}, error) {
+func (s *Stack[T]) Pop() (T, error) {
 	if s.IsEmpty() {
-		return nil, errors.New("stack is empty")
+		var zero T
+		return zero, errors.New("stack is empty")
 	}
 	index := len(s.items) - 1
 	item := s.items[index]
@@ -108,19 +110,33 @@ func (s *Stack) Pop() (interface{}, error) {
 
 // Peek returns the top item of the stack without removing it.
 // It returns the item and a boolean indicating success, or an error if the stack is empty.
-func (s *Stack) Peek() (interface{}, error) {
+func (s *Stack[T]) Peek() (T, error) {
 	if s.IsEmpty() {
-		return nil, errors.New("stack is empty")
+		var zero T
+		return zero, errors.New("stack is empty")
 	}
 	return s.items[len(s.items)-1], nil
 }
 
 // IsEmpty checks if the stack is empty.
-func (s *Stack) IsEmpty() bool {
+func (s *Stack[T]) IsEmpty() bool {
 	return len(s.items) == 0
 }
 
 // Size returns the number of elements in the stack.
-func (s *Stack) Size() int {
+func (s *Stack[T]) Size() int {
 	return len(s.items)
+}
+
+// Print the values in stack
+func (s *Stack[T]) Print() {
+	fmt.Print("[")
+
+	for i := 0; i < len(s.items); i++ {
+		fmt.Print(s.items[i])
+		if i < len(s.items)-1 {
+			fmt.Print(", ")
+		}
+	}
+	fmt.Println("]")
 }

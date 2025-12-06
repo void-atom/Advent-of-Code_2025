@@ -30,6 +30,7 @@ func DayThreePartOne(input string) int {
 	return answer
 }
 
+// Logic similar to evaluating mathematical expression
 func DayThreePartTwo(input string) int {
 	TOTAL_NUM_BATTERIES := 12
 	input_data := strings.Split(input, "\n")

@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"errors"
 	"os"
 	"strconv"
 	"strings"
@@ -81,4 +82,45 @@ func RepeatedSubstring(number string) bool {
 	// fmt.Println(value_to_return)
 	return value_to_return
 
+}
+
+// This stack code is AI generated
+type Stack struct {
+	items []interface{} // Using interface{} allows for storing any type
+}
+
+// Push adds an item to the top of the stack.
+func (s *Stack) Push(item interface{}) {
+	s.items = append(s.items, item)
+}
+
+// Pop removes and returns the top item from the stack.
+// It returns the item and a boolean indicating success, or an error if the stack is empty.
+func (s *Stack) Pop() (interface{}, error) {
+	if s.IsEmpty() {
+		return nil, errors.New("stack is empty")
+	}
+	index := len(s.items) - 1
+	item := s.items[index]
+	s.items = s.items[:index] // Slice off the top element
+	return item, nil
+}
+
+// Peek returns the top item of the stack without removing it.
+// It returns the item and a boolean indicating success, or an error if the stack is empty.
+func (s *Stack) Peek() (interface{}, error) {
+	if s.IsEmpty() {
+		return nil, errors.New("stack is empty")
+	}
+	return s.items[len(s.items)-1], nil
+}
+
+// IsEmpty checks if the stack is empty.
+func (s *Stack) IsEmpty() bool {
+	return len(s.items) == 0
+}
+
+// Size returns the number of elements in the stack.
+func (s *Stack) Size() int {
+	return len(s.items)
 }

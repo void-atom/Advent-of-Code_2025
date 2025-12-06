@@ -140,3 +140,33 @@ func (s *Stack[T]) Print() {
 	}
 	fmt.Println("]")
 }
+
+// Count the total neighbouring cells with paper rolls
+func CountTotalNeighbouringRolls(input *[]string, idx_x int, idx_y int) int {
+	total := 0
+	height := len(*input)
+	width := len((*input)[0])
+
+	dirs := [][2]int{
+		{0, 1},   // Right
+		{-1, 1},  // Up Right
+		{-1, 0},  // Up
+		{-1, -1}, // Up Left
+		{0, -1},  // Left
+		{1, -1},  // Down Left
+		{1, 0},   // Down
+		{1, 1},   // Down Right
+	}
+
+	for _, d := range dirs {
+		ny := idx_y + d[0]
+		nx := idx_x + d[1]
+		if ny >= 0 && ny < height && nx >= 0 && nx < width {
+			if (*input)[ny][nx] == '@' {
+				total++
+			}
+		}
+	}
+
+	return total
+}

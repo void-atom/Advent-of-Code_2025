@@ -9,7 +9,7 @@ import (
 func main() {
 	// change this choice value to the day you want the answer of
 	// Example choice := 1 gives answer for day 1
-	choice := 4
+	choice := 5
 	solution_day := days.DaysMap[choice]
 
 	file_path := fmt.Sprintf("input_files/day%d.txt", choice)

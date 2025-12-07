@@ -4,8 +4,17 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
+)
+
+// CONSTANTS used throughout the project
+const (
+	FORWARD_LOOK_INDEX = 5
+	INDEX_ZERO         = 0
+	INDEX_ONE          = 1
+	INDEX_TWO          = 2
 )
 
 // function to just check errs from std lib functions
@@ -169,4 +178,51 @@ func CountTotalNeighbouringRolls(input *[]string, idx_x int, idx_y int) int {
 	}
 
 	return total
+}
+
+// sort ranges based on the start and then the end
+func SortRanges(range_list [][2]int) [][INDEX_TWO]int {
+
+	sort.Slice(range_list, func(i, j int) bool {
+		if range_list[i][INDEX_ZERO] != range_list[j][INDEX_ZERO] {
+			return range_list[i][INDEX_ZERO] < range_list[j][INDEX_ZERO]
+		} else {
+			return range_list[i][INDEX_ONE] < range_list[j][INDEX_ONE]
+		}
+	})
+	// fmt.Println(range_list)
+	return range_list
+
+}
+
+// Future improvements: Maybe binary search can be used?
+func SearchInRange(range_list [][2]int, search_id int) bool {
+	for _, r := range range_list {
+		if r[0] <= search_id && search_id <= r[1] {
+			return true
+		}
+	}
+	return false
+}
+
+func MergeRangesSorted(ranges_raw [][2]int) [][2]int {
+	if len(ranges_raw) == 0 {
+		return nil
+	}
+	ranges := SortRanges(ranges_raw)
+	merged := make([][2]int, 0, len(ranges))
+	merged = append(merged, ranges[0])
+
+	for _, r := range ranges[1:] {
+		last := &merged[len(merged)-1]
+		if r[0] <= last[1] { // overlap
+			if r[1] > last[1] {
+				last[1] = r[1] // extend the last range
+			}
+		} else {
+			merged = append(merged, r) // no overlap, add new range
+		}
+	}
+
+	return merged
 }

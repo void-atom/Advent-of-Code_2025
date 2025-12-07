@@ -10,6 +10,6 @@ var DaysMap = map[int]Day{
 	2: {DayTwoPartOne, DayTwoPartTwo},
 	3: {DayThreePartOne, DayThreePartTwo},
 	4: {DayFourPartOne, DayFourPartTwo},
-	// 5: {DayFivePartOne, DayFivePartTwo},
+	5: {DayFivePartOne, DayFivePartTwo},
 	// 6: {DaySixPartOne, DaySixPartTwo},
 }
